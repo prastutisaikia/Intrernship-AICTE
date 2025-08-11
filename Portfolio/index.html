@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
     <style>
-      /* --- Global Styles & Font --- */
       :root {
         --primary-color: #4a0dcd;
         --primary-hover: #340796;
@@ -54,7 +53,6 @@
         background-color: var(--secondary-color);
       }
 
-      /* --- Navigation Bar --- */
       .navbar {
         background-color: var(--background-light);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -93,7 +91,6 @@
         color: var(--primary-color);
       }
 
-      /* --- Hero/Home Section --- */
       #home {
         display: flex;
         align-items: center;
@@ -129,7 +126,6 @@
         background-color: var(--primary-hover);
       }
 
-      /* --- Grid Layout for sections --- */
       .grid {
         display: grid;
         gap: 2rem;
@@ -144,7 +140,6 @@
         grid-template-columns: repeat(3, 1fr);
       }
 
-      /* --- About Me Section --- */
       .about-image {
         width: 100%;
         max-width: 300px;
@@ -157,7 +152,6 @@
         color: var(--text-light);
       }
 
-      /* --- Social Links Styling (used in About and Contact) --- */
       #contact {
         background-color: var(--secondary-color);
       }
@@ -188,7 +182,6 @@
         transform: translateY(-5px);
       }
 
-      /* --- Skills Section --- */
       #skills{
         background-color: var(--secondary-color);
       }
@@ -215,7 +208,6 @@
         color: var(--primary-color);
       }
 
-      /* --- Projects Section --- */
       #projects .grid-3-cols {
         display: flex;
         justify-content: center;
@@ -259,7 +251,6 @@
 
   </head>
   <body>
-    <!-- Navigation -->
     <nav class="navbar">
       <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
@@ -270,7 +261,6 @@
       </ul>
     </nav>
 
-    <!-- Home Section -->
     <section id="home">
       <div class="hero-content">
         <h1>Hello, I'm Prastuti Saikia</h1>
@@ -279,7 +269,6 @@
       </div>
     </section>
 
-    <!-- About Me Section -->
     <section id="about">
       <div class="container">
         <h2>About Me</h2>
@@ -294,7 +283,6 @@
       </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills">
       <div class="container">
         <h2>My Skills</h2>
@@ -318,12 +306,11 @@
       </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects">
       <div class="container">
         <h2>My Projects</h2>
         <div class="grid grid-3-cols">
-          <!-- Project 1 -->
+
           <div class="project-card">
             <img src="temerature_converter.webp" alt="Temperature Converter" class="project-image"/>
             <div class="project-info">
@@ -331,7 +318,7 @@
               <p>A simple and clean web app to convert temperatures between Celsius, Fahrenheit, and Kelvin. Built with plain HTML, CSS, and JS.</p>
             </div>
           </div>
-          <!-- Project 2 -->
+
           <div class="project-card">
             <img src="portfolio.webp" alt="Portfolio" class="project-image"/>
             <div class="project-info">
@@ -343,7 +330,6 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
       <div class="container">
         <div class="social-links-wrapper">
