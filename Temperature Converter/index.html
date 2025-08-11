@@ -21,7 +21,6 @@
         padding: 1rem;
       }
 
-      /* --- Main Converter Card --- */
       .converter-card {
         background-color: #e7d3d3;
         width: 100%;
@@ -49,7 +48,6 @@
         margin-top: 2rem;
       }
 
-      /* --- Form Elements & Layout --- */
       .form-group {
         margin-bottom: 1.5rem;
       }
@@ -90,7 +88,6 @@
         gap: 1rem;
       }
 
-      /* --- Button --- */
       #convertBtn {
         width: 100%;
         padding: 0.85rem;
@@ -108,7 +105,6 @@
         background-color: #1d4ed8;
       }
 
-      /* --- Output Field --- */
       #outputValue {
         width: 100%;
         min-height: 50px;
@@ -184,7 +180,6 @@
 
       const roundResult = (num) => {
         if (num === null || isNaN(num)) return "";
-        // Round to 2 decimal places for a clean look
         return +(Math.round(num + "e+2") + "e-2");
       };
 
@@ -193,18 +188,15 @@
         const to = toUnit.value;
         const temp = parseFloat(inputValue.value);
 
-        // Check if input is a valid number
         if (isNaN(temp)) {
           outputValue.textContent = "Please enter a valid number.";
           outputValue.classList.add("error");
           return;
         }
 
-        // Clear any previous error styling
         outputValue.classList.remove("error");
         outputValue.textContent = "";
 
-        // If units are the same, no conversion needed
         if (from === to) {
           outputValue.textContent = temp;
           return;
@@ -212,7 +204,6 @@
 
         let valueInCelsius;
 
-        // Step 1: Convert the input temperature to a base unit (Celsius)
         switch (from) {
           case "fahrenheit":
             valueInCelsius = ((temp - 32) * 5) / 9;
@@ -220,14 +211,13 @@
           case "kelvin":
             valueInCelsius = temp - 273.15;
             break;
-          default: // 'celsius'
+          default:
             valueInCelsius = temp;
             break;
         }
 
         let result;
 
-        // Step 2: Convert from Celsius to the target unit
         switch (to) {
           case "fahrenheit":
             result = (valueInCelsius * 9) / 5 + 32;
@@ -235,7 +225,7 @@
           case "kelvin":
             result = valueInCelsius + 273.15;
             break;
-          default: // 'celsius'
+          default: 
             result = valueInCelsius;
             break;
         }
