@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Temperature Converter</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: EEEEEE;
+        color: #374151;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      /* --- Main Converter Card --- */
+      .converter-card {
+        background-color: #e7d3d3;
+        width: 100%;
+        max-width: 450px;
+        padding: 2rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      header h1 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        text-align: center;
+        color: #1f2937;
+      }
+
+      header p {
+        margin-top: 0.5rem;
+        text-align: center;
+        color: #6b7280;
+      }
+
+      main {
+        margin-top: 2rem;
+      }
+
+      /* --- Form Elements & Layout --- */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group:last-child {
+        margin-bottom: 0;
+      }
+
+      label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+      }
+
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        color: #1f2937;
+        background-color: #f9fafb;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      input[type="number"]:focus,
+      select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      }
+
+      .dropdown-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      /* --- Button --- */
+      #convertBtn {
+        width: 100%;
+        padding: 0.85rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #2563eb;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #convertBtn:hover {
+        background-color: #1d4ed8;
+      }
+
+      /* --- Output Field --- */
+      #outputValue {
+        width: 100%;
+        min-height: 50px;
+        padding: 0.75rem;
+        font-size: 1.125rem;
+        font-weight: 600;
+        background-color: #e5e7eb;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+      }
+
+      #outputValue.error {
+        color: #ef4444;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="converter-card">
+      <header>
+        <h1>Temperature Converter</h1>
+        <p>Select units and click convert</p>
+      </header>
+
+      <main>
+        <div class="form-group">
+          <label for="inputValue">Value to Convert</label>
+          <input
+            type="number"
+            id="inputValue"
+            placeholder="Enter temperature"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="outputValue">Result</label>
+          <div id="outputValue">
+          </div>
+        </div>
+
+        <div class="form-group dropdown-container">
+          <div>
+            <label for="fromUnit">From</label>
+            <select id="fromUnit">
+              <option value="celsius">Celsius (°C)</option>
+              <option value="fahrenheit">Fahrenheit (°F)</option>
+              <option value="kelvin">Kelvin (K)</option>
+            </select>
+          </div>
+          <div>
+            <label for="toUnit">To</label>
+            <select id="toUnit">
+              <option value="fahrenheit">Fahrenheit (°F)</option>
+              <option value="celsius">Celsius (°C)</option>
+              <option value="kelvin">Kelvin (K)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button id="convertBtn">Convert</button>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const inputValue = document.getElementById("inputValue");
+      const fromUnit = document.getElementById("fromUnit");
+      const toUnit = document.getElementById("toUnit");
+      const convertBtn = document.getElementById("convertBtn");
+      const outputValue = document.getElementById("outputValue");
+
+      const roundResult = (num) => {
+        if (num === null || isNaN(num)) return "";
+        // Round to 2 decimal places for a clean look
+        return +(Math.round(num + "e+2") + "e-2");
+      };
+
+      const convertTemperature = () => {
+        const from = fromUnit.value;
+        const to = toUnit.value;
+        const temp = parseFloat(inputValue.value);
+
+        // Check if input is a valid number
+        if (isNaN(temp)) {
+          outputValue.textContent = "Please enter a valid number.";
+          outputValue.classList.add("error");
+          return;
+        }
+
+        // Clear any previous error styling
+        outputValue.classList.remove("error");
+        outputValue.textContent = "";
+
+        // If units are the same, no conversion needed
+        if (from === to) {
+          outputValue.textContent = temp;
+          return;
+        }
+
+        let valueInCelsius;
+
+        // Step 1: Convert the input temperature to a base unit (Celsius)
+        switch (from) {
+          case "fahrenheit":
+            valueInCelsius = ((temp - 32) * 5) / 9;
+            break;
+          case "kelvin":
+            valueInCelsius = temp - 273.15;
+            break;
+          default: // 'celsius'
+            valueInCelsius = temp;
+            break;
+        }
+
+        let result;
+
+        // Step 2: Convert from Celsius to the target unit
+        switch (to) {
+          case "fahrenheit":
+            result = (valueInCelsius * 9) / 5 + 32;
+            break;
+          case "kelvin":
+            result = valueInCelsius + 273.15;
+            break;
+          default: // 'celsius'
+            result = valueInCelsius;
+            break;
+        }
+
+        outputValue.textContent = roundResult(result);
+      };
+
+      convertBtn.addEventListener("click", convertTemperature);
+
+      inputValue.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+          convertTemperature();
+        }
+      });
+    </script>
+  </body>
+</html>
