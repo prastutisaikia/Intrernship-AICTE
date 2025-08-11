@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <style>
+      /* --- Global Styles & Font --- */
+      :root {
+        --primary-color: #4a0dcd;
+        --primary-hover: #340796;
+        --secondary-color: #1e293b;
+        --text-dark: #f8fafc;
+        --text-light: #94a3b8;
+        --background-light: #0f172a;
+        --border-color: #334155;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 4rem 0;
+      }
+
+      h1, h2, h3 {
+        line-height: 1.2;
+        color: var(--text-dark);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      section:nth-of-type(even) {
+        background-color: var(--secondary-color);
+      }
+
+      /* --- Navigation Bar --- */
+      .navbar {
+        background-color: var(--background-light);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary-color);
+      }
+
+      /* --- Hero/Home Section --- */
+      #home {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 100vh;
+        background-color: var(--secondary-color);
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero-content p {
+        font-size: 1.25rem;
+        color: var(--text-light);
+        margin-bottom: 2rem;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 0.8rem 2rem;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background-color 0.3s;
+      }
+
+      .cta-button:hover {
+        background-color: var(--primary-hover);
+      }
+
+      /* --- Grid Layout for sections --- */
+      .grid {
+        display: grid;
+        gap: 2rem;
+      }
+
+      .grid-2-cols {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+
+      .grid-3-cols {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      /* --- About Me Section --- */
+      .about-image {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 0.5rem;
+        justify-self: center;
+      }
+
+      .about-text p {
+        margin-bottom: 1rem;
+        color: var(--text-light);
+      }
+
+      /* --- Social Links Styling (used in About and Contact) --- */
+      #contact {
+        background-color: var(--secondary-color);
+      }
+      .social-links-wrapper {
+        text-align: center;
+      }
+
+      .social-links-wrapper p {
+        color: var(--text-light);
+        margin-bottom: 1.5rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .social-icon img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .social-icon:hover img {
+        transform: translateY(-5px);
+      }
+
+      /* --- Skills Section --- */
+      #skills{
+        background-color: var(--secondary-color);
+      }
+      .skill-card {
+        background: var(--background-light);
+        padding: 2rem;
+        text-align: center;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .skill-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-card h3 {
+        margin-top: 1rem;
+      }
+
+      .skill-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+      }
+
+      /* --- Projects Section --- */
+      #projects .grid-3-cols {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .project-card {
+        background: var(--background-light);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        max-width: 350px;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        background-color: #ccc;
+      }
+
+      .project-info {
+        padding: 1.5rem;
+      }
+
+      .project-info h3 {
+        margin-bottom: 0.5rem;
+      }
+
+      .project-info p {
+        color: var(--text-light);
+        margin-bottom: 1rem;
+      }
+    </style>
+
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+      <div class="hero-content">
+        <h1>Hello, I'm Prastuti Saikia</h1>
+        <p>A passionate Web Developer creating modern and responsive web applications.</p>
+        <a href="#projects" class="cta-button">View My Work</a>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about">
+      <div class="container">
+        <h2>About Me</h2>
+        <div class="grid grid-2-cols">
+          <img src="image.webp" alt="My Image" class="about-image"/>
+          <div class="about-text">
+            <h3>Developer & Problem Solver</h3>
+            <p>I am a junior web developer with a strong foundation in front-end technologies and a passion for building intuitive and user-friendly web experiences thrive on turning complex problems into simple, beautiful, and functional designs.</p>
+            <p>Currently, I'm expanding my skills in back-end development and cloud technologies, aiming to become a full-stack developer. When I'm not coding, I enjoy hiking, reading tech blogs, and contributing to open-source projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <div class="container">
+        <h2>My Skills</h2>
+        <div class="grid grid-3-cols">
+          <div class="skill-card">
+            <div class="skill-icon">💻</div>
+            <h3>Front-End</h3>
+            <p>HTML, CSS, JavaScript, React, Responsive Design</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🗄️</div>
+            <h3>Back-End</h3>
+            <p>Node.js, Express, Python, SQL, MongoDB</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🔧</div>
+            <h3>Tools</h3>
+            <p>Git, GitHub, VS Code, Figma, Webpack</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="container">
+        <h2>My Projects</h2>
+        <div class="grid grid-3-cols">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <img src="temerature_converter.webp" alt="Temperature Converter" class="project-image"/>
+            <div class="project-info">
+              <h3>Temperature Converter</h3>
+              <p>A simple and clean web app to convert temperatures between Celsius, Fahrenheit, and Kelvin. Built with plain HTML, CSS, and JS.</p>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div class="project-card">
+            <img src="portfolio.webp" alt="Portfolio" class="project-image"/>
+            <div class="project-info">
+              <h3>Portfolio Website</h3>
+              <p>The very website you are on now! A fully responsive personal portfolio designed to showcase my skills and projects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <div class="social-links-wrapper">
+          <h2>Contact</h2>
+          <p>Feel free to contact me through Email, Linkedin or check out my projects at Github.</p>
+          <div class="social-links">
+            <a
+              href="https://google.com" class="social-icon" label="Email">
+              <img src="email.webp" alt="Email Icon" />
+            </a>
+            <a href="https://google.com" class="social-icon" label="LinkedIn">
+              <img src="linkedin.webp" alt="LinkedIn Icon" />
+            </a>
+            <a href="https://google.com" class="social-icon" label="GitHub">
+              <img src="github.webp" alt="GitHub Icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const navToggleBtn = document.getElementById("navToggleBtn");
+      const navLinks = document.getElementById("navLinks");
+
+      navToggleBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        navToggleBtn.classList.toggle("active");
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (navLinks.classList.contains("active")) {
+            navLinks.classList.remove("active");
+            navToggleBtn.classList.remove("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
